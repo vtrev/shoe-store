@@ -32,16 +32,28 @@ let displayShoes = function (shoesToDisplay) {
 };
 
 searchBtnElement.addEventListener('click', function search() {
+    let specs = {};
+    specs.brand = document.getElementById('shoeBrand').value;
+    specs.color = document.getElementById('shoeColor').value;
+    specs.size = document.getElementById('shoeSize').value;
 
-    // let shoeBrand = document.getElementById('shoeBrand').value;
-    // let shoeColor = document.getElementById('shoeColor').value;
-    // let shoeSize = document.getElementById('shoeSize').value;
-    // let specs = {};
+
     try {
-        axios.get('api/shoes').then(function (res) {
-            // console.log(res.data.data)
-            displayShoes(res.data.data);
-        })
+        if (specs.brand == 'null' && specs.color == 'null') {
+            axios.get('api/shoes').then(function (res) {
+                displayShoes(res.data.data);
+            });
+        };
+        if (specs.brand !== 'null' && specs.color == 'null') {
+            let route = 'api/shoes/brand/' + specs.brand
+
+            axios.get(route).then(function (res) {
+                displayShoes(res.data.data);
+            });
+        };
+
+
+
         //     if (shoeBrand !== 'null') {
         //         specs.brand = shoeBrand
         //     }

@@ -55,7 +55,7 @@ app.use(bodyParser.urlencoded({
 
 //routes
 app.get('/api/shoes', shoeAPI.all);
-
+app.get('/api/shoes/brand/:brand', shoeAPI.brand)
 
 const PORT = process.env.PORT || 3030;
 //FIRE TO THE SERVER  
