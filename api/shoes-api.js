@@ -1,8 +1,8 @@
 module.exports = function (shoesInstance) {
     let all = async function (req, res) {
         try {
-            let result = await shoesInstance.getShoes({
-                shoeBrand: 'all'
+            let result = await shoesInstance.getAll({
+                brand: 'all'
             });
             res.json({
                 status: 'success',
@@ -12,18 +12,45 @@ module.exports = function (shoesInstance) {
             console.log(err);
         };
     };
-
+    // method to get shoes by brand name
     let brand = async function (req, res) {
         let specs = {
-            brand: req.params.brand,
-            color: req.params.color
+            brand: req.params.brand
         }
         try {
+            let result = await shoesInstance.getBrand(specs);
+            res.json({
+                status: 'success',
+                data: result
+            });
+        } catch (err) {
+            console.log(err)
+        };
+    };
 
-            let result = await shoesInstance.getShoes(specs);
-
-            console.log(result);
-
+    // method to get shoes by size
+    let size = async function (req, res) {
+        let specs = {
+            size: req.params.size
+        };
+        try {
+            let result = await shoesInstance.getSize(specs);
+            res.json({
+                status: 'success',
+                data: result
+            });
+        } catch (err) {
+            console.log(err)
+        };
+    };
+    // get shoes by brand name and size
+    let brandSize = async function (req, res) {
+        let specs = {
+            brand: req.params.brandname,
+            size: req.params.size
+        }
+        try {
+            result = await shoesInstance.getBrandSize(specs);
             res.json({
                 status: 'success',
                 data: result
@@ -31,12 +58,16 @@ module.exports = function (shoesInstance) {
 
         } catch (err) {
             console.log(err)
-        }
-    }
+        };
+
+
+    };
 
     return {
         all,
-        brand
-    }
+        brand,
+        size,
+        brandSize
+    };
 
 };

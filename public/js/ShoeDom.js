@@ -1,16 +1,3 @@
-let localShoes = JSON.parse(localStorage.getItem('shoesData'));
-
-let shoes;
-// console.log(localShoes);
-if (localShoes) {
-    console.log('found catalogue on local storage')
-    shoes = ShoeFactory(localShoes);
-} else {
-    console.log('using defualt catalogue')
-    shoes = ShoeFactory(shoesArray);
-}
-
-
 let searchBtnElement = document.getElementById('searchButton');
 
 let addToCart = function (shoe) {
@@ -36,25 +23,34 @@ searchBtnElement.addEventListener('click', function search() {
     specs.brand = document.getElementById('shoeBrand').value;
     specs.color = document.getElementById('shoeColor').value;
     specs.size = document.getElementById('shoeSize').value;
-
-
     try {
-        if (specs.brand == 'null' && specs.color == 'null') {
+        if (specs.brand == 'null' && specs.size == 'null') {
             axios.get('api/shoes').then(function (res) {
                 displayShoes(res.data.data);
             });
-        };
-        if (specs.brand !== 'null' && specs.color == 'null') {
+        } else if (specs.brand !== 'null' && specs.size == 'null') {
             let route = 'api/shoes/brand/' + specs.brand
 
             axios.get(route).then(function (res) {
                 displayShoes(res.data.data);
             });
+        } else if (specs.brand !== 'null' && specs.size !== 'null') {
+            let route = 'api/shoes/brand/' + specs.brand + '/size/' + specs.size
+            axios.get(route).then(function (res) {
+                displayShoes(res.data.data)
+            });
+        } else if (specs.brand == 'null' && specs.size !== 'null') {
+
+            let route = 'api/shoes/size/' + specs.size;
+            console.log(route)
+            axios.get(route).then(function (res) {
+                displayShoes(res.data.data)
+            });
         };
 
 
 
-        //     if (shoeBrand !== 'null') {
+        //     if (ranBrand !== 'null') {
         //         specs.brand = shoeBrand
         //     }
         //     if (shoeColor !== 'null') {
