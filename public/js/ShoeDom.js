@@ -26,15 +26,15 @@ searchBtnElement.addEventListener('click', function search() {
                 displayShoes(res.data.data);
             });
         } else if (specs.brand !== 'null' && specs.size == 'null') {
-            axios.get('api/shoes/brand/' + specs.brand).then(function (res) {
+            axios.get(`api/shoes/brand/${specs.brand}`).then(function (res) {
                 displayShoes(res.data.data);
             });
         } else if (specs.brand !== 'null' && specs.size !== 'null') {
-            axios.get('api/shoes/brand/' + specs.brand + '/size/' + specs.size).then(function (res) {
+            axios.get(`api/shoes/brand/${specs.brand}/size/${specs.size}`).then(function (res) {
                 displayShoes(res.data.data)
             });
         } else if (specs.brand == 'null' && specs.size !== 'null') {
-            axios.get('api/shoes/size/' + specs.size).then(function (res) {
+            axios.get(`api/shoes/size/${specs.size}`).then(function (res) {
                 displayShoes(res.data.data)
             });
         };
