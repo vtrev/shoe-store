@@ -431,3 +431,76 @@ nav a:hover {
     border-radius: 25px;
     background-color: lime;
 }
+
+/* modal */
+
+
+.card2 {
+    max-height: 300px;
+    max-width: 230px;
+    border: 1px solid darkgray;
+    border-radius: 3px;
+    margin: 10px;
+}
+
+/* // MODAL STARTS HERE // */
+
+.bg-modal {
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-contents {
+    height: 150px;
+    width: 350px;
+    background-color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    border-radius: 4px;
+}
+
+input {
+    margin: 15px auto;
+    display: block;
+    width: 50%;
+    padding: 8px;
+    border: 1px solid gray;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 42px;
+    color: #333;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #666;
+}
+
+.modal-button {
+    background-color: lime;
+    border: 2px solid white;
+    border-radius: 30px;
+    text-decoration: none;
+    padding: 10px 28px;
+    color: white;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.modal-button:hover {
+    background-color: white;
+    color: lime;
+    border: 2px solid lime;
+}

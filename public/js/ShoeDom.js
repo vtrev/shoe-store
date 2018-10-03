@@ -15,6 +15,17 @@ let displayShoes = function (shoesToDisplay) {
     shoesDataElement.innerHTML = shoesHTML;
 };
 
+let cartModalAction = function (action) {
+    if (action == 'activate') {
+        document.querySelector('.bg-modal').style.display = "flex";
+    }
+    if (action == 'deactivate') {
+        document.querySelector('.bg-modal').style.display = "none";
+    }
+}
+
+cartModalAction('activate');
+
 searchBtnElement.addEventListener('click', function search() {
     let specs = {};
     specs.brand = document.getElementById('shoeBrand').value;
