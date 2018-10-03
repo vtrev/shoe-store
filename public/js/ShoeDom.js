@@ -4,11 +4,8 @@ let addToCart = function (shoe) {
     shoes.addToCart(shoe);
     let prevSpecs = JSON.parse(localStorage.getItem('specs'));
     displayShoes(shoes.getShoes(prevSpecs));
-
-}
-
+};
 let displayShoes = function (shoesToDisplay) {
-
     let shoesData = {};
     shoesData['shoes'] = shoesToDisplay.reverse()
     var shoesDataElement = document.getElementById("shoesArea");
@@ -29,35 +26,18 @@ searchBtnElement.addEventListener('click', function search() {
                 displayShoes(res.data.data);
             });
         } else if (specs.brand !== 'null' && specs.size == 'null') {
-            let route = 'api/shoes/brand/' + specs.brand
-
-            axios.get(route).then(function (res) {
+            axios.get('api/shoes/brand/' + specs.brand).then(function (res) {
                 displayShoes(res.data.data);
             });
         } else if (specs.brand !== 'null' && specs.size !== 'null') {
-            let route = 'api/shoes/brand/' + specs.brand + '/size/' + specs.size
-            axios.get(route).then(function (res) {
+            axios.get('api/shoes/brand/' + specs.brand + '/size/' + specs.size).then(function (res) {
                 displayShoes(res.data.data)
             });
         } else if (specs.brand == 'null' && specs.size !== 'null') {
-
-            let route = 'api/shoes/size/' + specs.size;
-            console.log(route)
-            axios.get(route).then(function (res) {
+            axios.get('api/shoes/size/' + specs.size).then(function (res) {
                 displayShoes(res.data.data)
             });
         };
-
-
-
-        //     if (ranBrand !== 'null') {
-        //         specs.brand = shoeBrand
-        //     }
-        //     if (shoeColor !== 'null') {
-        //         specs.color = shoeColor
-        //     }
-        //     if (shoeSize !== 'null') {
-        //         specs.size = shoeSize
     } finally {
 
 

@@ -1,7 +1,7 @@
 module.exports = function ShoeServices(pool) {
 
     let getAll = async function (specs) {
-        let sql = 'SELECT * FROM shoes'
+        const sql = 'SELECT qty,price,brand,color,img_link,size from shoes join sizes on size_id=sizes.id join brands on shoes.brand_id=brands.id join colors on shoes.color_id=colors.id join images on shoes.image_id=images.id'
         let result = await pool.query(sql);
         return result.rows
     }
