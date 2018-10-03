@@ -9,6 +9,12 @@ module.exports = function ShoeServices(pool) {
                 const result = await pool.query(sql, params);
                 res.brandId = result.rows[0].id;
             }
+            if (specs.size) {
+                const sql = 'SELECT id FROM sizes WHERE size=$1';
+                const params = [specs.size];
+                const result = await pool.query(sql, params);
+                res.sizeId = result.rows[0].id;
+            }
         } finally {
             return res
         }
@@ -27,8 +33,9 @@ module.exports = function ShoeServices(pool) {
         return result.rows
     }
     let getSize = async function (specs) {
-        let sql = 'SELECT * FROM shoes WHERE size=$1';
-        let params = [specs.size];
+        let sizeId = await getIds(specs);
+        let sql = 'SELECT qty,price,brand,color,img_link,size from shoes join sizes on size_id=sizes.id join brands on shoes.brand_id=brands.id join colors on shoes.color_id=colors.id join images on shoes.image_id=images.id WHERE size_id=$1';
+        let params = [sizeId.sizeId];
         let result = await pool.query(sql, params);
         return result.rows
     }
