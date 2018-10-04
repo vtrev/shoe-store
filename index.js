@@ -58,6 +58,7 @@ app.get('/api/shoes', shoeAPI.all);
 app.get('/api/shoes/brand/:brand', shoeAPI.brand);
 app.get('/api/shoes/size/:size', shoeAPI.size);
 app.get('/api/shoes/brand/:brandname/size/:size', shoeAPI.brandSize);
+app.post('/api/shoes', shoeAPI.addShoe);
 
 const PORT = process.env.PORT || 3030;
 //FIRE TO THE SERVER  

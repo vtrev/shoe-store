@@ -62,12 +62,28 @@ module.exports = function (shoesInstance) {
 
 
     };
+    // post route to add shoes into the database
+    let addShoe = async function (req, res) {
+        let addSpecs = req.body;
+        try {
+            result = await shoesInstance.addShoe(addSpecs);
+            res.json({
+                status: 'success',
+                data: result
+            });
+
+        } catch (err) {
+            console.log(err)
+        };
+        console.log();
+    }
 
     return {
         all,
         brand,
         size,
-        brandSize
+        brandSize,
+        addShoe
     };
 
 };
