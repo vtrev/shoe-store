@@ -1,5 +1,7 @@
 let searchBtnElement = document.getElementById('searchButton');
-let modalOkay = document.querySelector('.modal-ok-button');
+let inCartBtn = document.getElementById('in-cart-btn');
+let noStockBtn = document.getElementById('no-stock-btn');
+
 
 let addToCart = function (shoeId) {
     axios.post(`/api/shoes/sale/${shoeId}`, {
@@ -7,17 +9,16 @@ let addToCart = function (shoeId) {
             action: 'reduce'
         })
         .then(function (response) {
-            if (response.data.data == "shoeInCart") {
-                cartModalAction('activate')
+            if (response.data.data == 'shoeInCart') {
+                cartModalAction('inCartModal', 'activate')
+            } else if (response.data.data == "emptyStock") {
+                cartModalAction('noStockModal', 'activate')
             }
-
             console.log(response);
         })
         .catch(function (error) {
             console.log(error);
         });
-    // let prevSpecs = JSON.parse(localStorage.getItem('specs'));
-    // displayShoes(shoes.getShoes(prevSpecs));
 };
 let displayShoes = function (shoesToDisplay) {
     let shoesData = {};
@@ -29,9 +30,10 @@ let displayShoes = function (shoesToDisplay) {
     shoesDataElement.innerHTML = shoesHTML;
 };
 
-let cartModalAction = function (action) {
+let cartModalAction = function (modal, action) {
     if (action == 'activate') {
-        document.querySelector('.bg-modal').style.display = "flex";
+        // document.querySelector('#inCartModal').style.display = "flex";
+        document.querySelector(`#${modal}`).style.display = "flex";
     }
     if (action == 'deactivate') {
         document.querySelector('.bg-modal').style.display = "none";
@@ -69,7 +71,11 @@ searchBtnElement.addEventListener('click', function search() {
     }
 
 });
-// EVENTS FOR MODAL
-modalOkay.addEventListener('click', function () {
-    cartModalAction('deactivate')
+// EVENTS FOR MODALS
+inCartBtn.addEventListener('click', function () {
+    cartModalAction('modal', 'deactivate')
+}, false)
+
+noStockBtn.addEventListener('click', function () {
+    cartModalAction('modal', 'deactivate')
 }, false)

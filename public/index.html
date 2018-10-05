@@ -106,19 +106,24 @@
     </div>
     <div id="shoesArea" class="row center">
     </div>
-    <div class="bg-modal">
+    <div class="bg-modal" id="inCartModal">
         <div class="modal-contents">
             <div class="closeShoeInCart">+</div>
             <p>Oops! This item is already in the cart</p>
-            <button class="modal-ok-button">Okay</button>
+            <button id="in-cart-btn" class="modal-ok-button"> Okay</button>
+        </div>
+    </div>
+    <div class="bg-modal" id="noStockModal">
+        <div class="modal-contents">
+            <div class="closeShoeInCart">+</div>
+            <p>Sorry we out of stock :(</p>
+            <button id="no-stock-btn" class="modal-ok-button">Okay</button>
         </div>
     </div>
 
 
 
+    <script type="text/javascript" src="js/ShoeDom.js"></script>
 </body>
-<script type="text/javascript" src="js/ShoeFactory.js"></script>
-<script type="text/javascript" src="js/cart.js "></script>
-<script type="text/javascript" src="js/ShoeDom.js"></script>
 
 </html>
