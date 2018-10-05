@@ -32,11 +32,6 @@ const pool = new Pool({
 const shoesInstance = Shoes(pool);
 // const route = router(shoesInstance);
 const shoeAPI = ShoesAPI(shoesInstance);
-
-
-
-
-
 // app use
 app.use(session({
     secret: 'Tshimugaramafatha'
@@ -58,7 +53,9 @@ app.get('/api/shoes', shoeAPI.all);
 app.get('/api/shoes/brand/:brand', shoeAPI.brand);
 app.get('/api/shoes/size/:size', shoeAPI.size);
 app.get('/api/shoes/brand/:brandname/size/:size', shoeAPI.brandSize);
+app.get('/api/shoes/cart', shoeAPI.cart);
 app.post('/api/shoes', shoeAPI.addShoe);
+app.post('/api/shoes/sale/:id', shoeAPI.updateQty);
 
 const PORT = process.env.PORT || 3030;
 //FIRE TO THE SERVER  

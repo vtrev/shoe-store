@@ -1,7 +1,20 @@
 let searchBtnElement = document.getElementById('searchButton');
 
-let addToCart = function (shoe) {
-    shoes.addToCart(shoe);
+let addToCart = function (shoeId) {
+    axios.post(`/api/shoes/sale/${shoeId}`, {
+            shoeId,
+            action: 'reduce'
+        })
+        .then(function (response) {
+
+
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+
     let prevSpecs = JSON.parse(localStorage.getItem('specs'));
     displayShoes(shoes.getShoes(prevSpecs));
 };
@@ -24,7 +37,7 @@ let cartModalAction = function (action) {
     }
 }
 
-cartModalAction('activate');
+// cartModalAction('activate');
 
 searchBtnElement.addEventListener('click', function search() {
     let specs = {};

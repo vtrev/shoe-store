@@ -28,15 +28,13 @@ module.exports = function ShoeServices(pool) {
                     res.colorId = result.rows[0].id
                 };
             };
-
         } finally {
             return res
         };
     };
-
     // This methods fetch the shoes(s) from the database given the specifications object.
     let getAll = async function (specs) {
-        let sql = 'SELECT qty,price,brand,color,img_link,size from shoes join sizes on size_id=sizes.id join brands on shoes.brand_id=brands.id join colors on shoes.color_id=colors.id join images on shoes.image_id=images.id'
+        let sql = 'SELECT shoes.id,qty,price,brand,color,img_link,size from shoes join sizes on size_id=sizes.id join brands on shoes.brand_id=brands.id join colors on shoes.color_id=colors.id join images on shoes.image_id=images.id'
         let result = await pool.query(sql);
         return result.rows
     };
@@ -105,11 +103,58 @@ module.exports = function ShoeServices(pool) {
         };
     };
 
+    let updateStock = async function (shoeId, action) {
+        if (action == 'reduce') {
+            // check if the shoe is not already in the cart
+            let checkCart = await pool.query('SELECT FROM cart WHERE shoe_id=$1', [shoeId]);
+            if (checkCart.rowCount == 0) {
+                // first check if the quantity is at least 1 and only reduce if true
+                let checkQty = await pool.query('SELECT qty FROM shoes WHERE id=$1', [shoeId]);
+                if (checkQty.rows[0].qty > 0) {
+                    let sql = 'UPDATE shoes SET qty = qty-1 WHERE id=$1';
+                    let params = [shoeId];
+                    await pool.query(sql, params);
+                    updateCart(shoeId, 'add');
+                    return 'addedToCart'
+                } else {
+                    return 'emptyStock'
+                };
+            } else if (checkCart.rowCount == 1) {
+                return 'shoeInCart'
+            }
+
+
+        }
+        if (action == 'gain') {
+            let sql = 'UPDATE shoes SET qty = qty+1 WHERE id=$1';
+            let params = [shoeId];
+            await pool.query(sql, params);
+            updateCart(shoeId, 'remove');
+            return 'shoeRemoved'
+        } else {
+            return 'failure'
+        };
+    };
+
+    let updateCart = async function (shoeId, action) {
+        if (action == 'add') {
+            await pool.query('INSERT INTO cart (shoe_id) values ($1)', [shoeId]);
+        };
+        if (action == 'remove') {
+            await pool.query('DELETE FROM cart WHERE shoe_id=$1', [shoeId]);
+        };
+    };
+    let getCart = async function () {
+        let result = await pool.query('SELECT * FROM cart JOIN shoes ON cart.shoe_id=shoes.id;');
+        return result.rows;
+    }
     return {
         getAll,
         getBrand,
         getSize,
         getBrandSize,
-        addShoe
-    };
+        addShoe,
+        updateStock,
+        getCart
+    }
 };
