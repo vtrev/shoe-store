@@ -474,7 +474,7 @@ input {
     border: 1px solid gray;
 }
 
-.close {
+.closeShoeInCart {
     position: absolute;
     top: 0;
     right: 10px;
@@ -484,11 +484,11 @@ input {
     cursor: pointer;
 }
 
-.close:hover {
+.closeShoeInCart:hover {
     color: #666;
 }
 
-.modal-button {
+.modal-ok-button {
     background-color: lime;
     border: 2px solid white;
     border-radius: 30px;
@@ -499,8 +499,8 @@ input {
     display: inline-block;
 }
 
-.modal-button:hover {
+/* .modal-ok-button:hover {
     background-color: white;
     color: lime;
     border: 2px solid lime;
-}
+} */

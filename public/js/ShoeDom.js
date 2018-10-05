@@ -1,4 +1,5 @@
 let searchBtnElement = document.getElementById('searchButton');
+let modalOkay = document.querySelector('.modal-ok-button');
 
 let addToCart = function (shoeId) {
     axios.post(`/api/shoes/sale/${shoeId}`, {
@@ -6,17 +7,17 @@ let addToCart = function (shoeId) {
             action: 'reduce'
         })
         .then(function (response) {
-
+            if (response.data.data == "shoeInCart") {
+                cartModalAction('activate')
+            }
 
             console.log(response);
         })
         .catch(function (error) {
             console.log(error);
         });
-
-
-    let prevSpecs = JSON.parse(localStorage.getItem('specs'));
-    displayShoes(shoes.getShoes(prevSpecs));
+    // let prevSpecs = JSON.parse(localStorage.getItem('specs'));
+    // displayShoes(shoes.getShoes(prevSpecs));
 };
 let displayShoes = function (shoesToDisplay) {
     let shoesData = {};
@@ -68,3 +69,7 @@ searchBtnElement.addEventListener('click', function search() {
     }
 
 });
+// EVENTS FOR MODAL
+modalOkay.addEventListener('click', function () {
+    cartModalAction('deactivate')
+}, false)

@@ -121,10 +121,8 @@ module.exports = function ShoeServices(pool) {
                 };
             } else if (checkCart.rowCount == 1) {
                 return 'shoeInCart'
-            }
-
-
-        }
+            };
+        };
         if (action == 'gain') {
             let sql = 'UPDATE shoes SET qty = qty+1 WHERE id=$1';
             let params = [shoeId];
