@@ -19,7 +19,7 @@ module.exports = function (shoesInstance) {
             brand: req.params.brand
         }
         try {
-            let result = await shoesInstance.getBrand(specs);
+            let result = await shoesInstance.getBrandSize(specs);
             res.json({
                 status: 'success',
                 data: result
@@ -34,7 +34,7 @@ module.exports = function (shoesInstance) {
             size: req.params.size
         };
         try {
-            let result = await shoesInstance.getSize(specs);
+            let result = await shoesInstance.getBrandSize(specs);
             res.json({
                 status: 'success',
                 data: result

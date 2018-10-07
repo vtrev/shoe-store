@@ -19,48 +19,29 @@ module.exports = function ShoeServices(pool) {
     };
     // This methods fetch the shoes(s) from the database given the specifications object.
     let getAll = async function (specs) {
-        console.log()
         let sql = 'SELECT shoes.id,qty,price,brand,color,img_link,size from shoes join sizes on size_id=sizes.id join brands on shoes.brand_id=brands.id join colors on shoes.color_id=colors.id join images on shoes.image_id=images.id'
         let result = await pool.query(sql);
         return result.rows
     };
-
+    // get brand/size and brand+size
     let getBrandSize = async function (specs) {
-
+        let getSpecKeys = Object.keys(specs);
+        let specsIds = await getIds(specs);
         let filter = Object.keys(specs)[0];
-        let sql = `SELECT shoes.id,qty,price,brand,color,img_link,size from shoes join sizes on size_id=sizes.id join brands on shoes.brand_id=brands.id join colors on shoes.color_id=colors.id join images on shoes.image_id=images.id WHERE ${filter}=${specs[filter]}`;
-        let result = await pool.query(sql);
-        return result.rows
-    }
+        let sql = `SELECT shoes.id,qty,price,brand,color,img_link,size from shoes join sizes on size_id=sizes.id join brands on shoes.brand_id=brands.id join colors on shoes.color_id=colors.id join images on shoes.image_id=images.id WHERE ${filter}_id=${specsIds[filter + 'Id']}`;
 
-
-
-
-
-    let getBrand = async function (specs) {
-        console.log(specs)
-        let brandId = await getIds(specs);
-        let sql = 'SELECT qty,price,brand,color,img_link,size from shoes join sizes on size_id=sizes.id join brands on shoes.brand_id=brands.id join colors on shoes.color_id=colors.id join images on shoes.image_id=images.id WHERE brand_id=$1'
-        let params = [brandId.brandId];
-        let result = await pool.query(sql, params);
-        return result.rows
-    };
-    let getSize = async function (specs) {
-        console.log(specs)
-        let sizeId = await getIds(specs);
-        let sql = 'SELECT qty,price,brand,color,img_link,size from shoes join sizes on size_id=sizes.id join brands on shoes.brand_id=brands.id join colors on shoes.color_id=colors.id join images on shoes.image_id=images.id WHERE size_id=$1';
-        let params = [sizeId.sizeId];
-        let result = await pool.query(sql, params);
-        return result.rows
+        if (getSpecKeys.length == 1) {
+            let result = await pool.query(sql);
+            return result.rows
+        } else if (getSpecKeys.length == 2) {
+            let filter1 = Object.keys(specs)[1];
+            sql = sql + ` AND ${filter1}_id=${specsIds[filter1+'Id']}`
+            let result = await pool.query(sql);
+            return result.rows
+        };
     };
 
-    let getBrandSizeBk = async function (specs) {
-        let sizeBrandIds = await getIds(specs);
-        let sql = 'SELECT qty,price,brand,color,img_link,size from shoes join sizes on size_id=sizes.id join brands on shoes.brand_id=brands.id join colors on shoes.color_id=colors.id join images on shoes.image_id=images.id WHERE brand_id=$1 AND size_id=$2';
-        let params = [sizeBrandIds.brandId, sizeBrandIds.sizeId];
-        let result = await pool.query(sql, params);
-        return result.rows
-    };
+
     // Add a shoe item into the database.
     let addShoe = async function (addSpecs) {
         let shoeAddIds = await getIds(addSpecs);
@@ -138,8 +119,6 @@ module.exports = function ShoeServices(pool) {
     }
     return {
         getAll,
-        getBrand,
-        getSize,
         getBrandSize,
         addShoe,
         updateStock,
