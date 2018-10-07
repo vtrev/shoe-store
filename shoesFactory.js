@@ -4,30 +4,40 @@ module.exports = function ShoeServices(pool) {
     let getIds = async function (specs) {
         let res = {};
         try {
-            if (specs.brand) {
-                let sql = 'SELECT id FROM brands WHERE brand=$1';
-                let params = [specs.brand];
+            let specsKeys = Object.keys(specs);
+            for (let i = 0; i < specsKeys.length; i++) {
+                let sql = `SELECT id FROM ${specsKeys[i]}s WHERE ${specsKeys[i]}=$1`;
+                let params = [specs[specsKeys[i]]];
                 let result = await pool.query(sql, params);
-                if (result.rows[0].id) {
-                    res.brandId = result.rows[0].id;
+                if (result.rowCount == 1) {
+                    res[`${specsKeys[i]}Id`] = result.rows[0].id;
                 };
             };
-            if (specs.size) {
-                let sql = 'SELECT id FROM sizes WHERE size=$1';
-                let params = [specs.size];
-                let result = await pool.query(sql, params);
-                if (result.rows[0].id) {
-                    res.sizeId = result.rows[0].id;
-                };
-            };
-            if (specs.color) {
-                let sql = 'SELECT id FROM colors WHERE color=$1';
-                let params = [specs.color];
-                let result = await pool.query(sql, params);
-                if (result.rows[0].id) {
-                    res.colorId = result.rows[0].id
-                };
-            };
+
+            // if (specs.brand) {
+            //     let sql = 'SELECT id FROM brands WHERE brand=$1';
+            //     let params = [specs.brand];
+            //     let result = await pool.query(sql, params);
+            //     if (result.rows[0].id) {
+            //         res.brandId = result.rows[0].id;
+            //     };
+            // };
+            // if (specs.size) {
+            //     let sql = 'SELECT id FROM sizes WHERE size=$1';
+            //     let params = [specs.size];
+            //     let result = await pool.query(sql, params);
+            //     if (result.rows[0].id) {
+            //         res.sizeId = result.rows[0].id;
+            //     };
+            // };
+            // if (specs.color) {
+            //     let sql = 'SELECT id FROM colors WHERE color=$1';
+            //     let params = [specs.color];
+            //     let result = await pool.query(sql, params);
+            //     if (result.rows[0].id) {
+            //         res.colorId = result.rows[0].id
+            //     };
+            // };
         } finally {
             return res
         };
@@ -67,6 +77,7 @@ module.exports = function ShoeServices(pool) {
         let shoeAddIds = await getIds(addSpecs);
         try {
             // Check if there are id's that do not exist in the current stock, if found create the brand,color or size and write the id into the shoeAddIds object.
+            // remove this if statements and just loop through the object ,take the keys and write the values into the new objectnod
             if (!shoeAddIds.sizeId) {
                 let sql = 'INSERT INTO sizes (size) values($1) RETURNING id';
                 let params = [addSpecs.size];
