@@ -11,10 +11,9 @@ addBtnElement.addEventListener('click', function run() {
     if ((addShoeBrand !== "null") && (addShoeColor !== "null") && (addShoeSize !== "null") && (addShoeQty !== "") && (addShoePrice !== "")) {
         addSpecs.brand = addShoeBrand;
         addSpecs.color = addShoeColor;
-        addSpecs.id = shoesData.length;
+        addSpecs.size = addShoeSize;
         addSpecs.price = addShoePrice;
         addSpecs.qty = addShoeQty;
-        addSpecs.size = addShoeSize;
         addSpecs["img-link"] = 0;
         axios.post('/api/shoes', addSpecs)
             .then(function (response) {
