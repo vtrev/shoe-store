@@ -20,6 +20,7 @@ describe('Shoe catalogue API', function () {
 
     // Testing method that handles 2 or 3 characters a registration can start with
     it('Should return specification Ids given the brand name and size', async function () {
+        await pool.query('DELETE FROM shoes');
         let specs = {
             brand: 'Adidas',
             size: '6'
@@ -47,6 +48,7 @@ describe('Shoe catalogue API', function () {
 
     // Testing method that handles 2 or 3 characters a registration can start with
     it('Should add shoes into the database given certain specifications aand reject duplicates', async function () {
+        await pool.query('DELETE FROM shoes');
         let specs = {
             brand: 'Nike',
             color: 'Black',
@@ -70,6 +72,7 @@ describe('Shoe catalogue API', function () {
         assert.equal(await shoeInstance.addShoe(specs), 'shoe already in store')
     });
     it('Should get all the shoes that have been stored in the database', async function () {
+        await pool.query('DELETE FROM shoes');
         let shoes = [{
             brand: 'Nike',
             color: 'Black',
@@ -108,7 +111,7 @@ describe('Shoe catalogue API', function () {
         assert.deepEqual(shoes, await shoeInstance.getAll());
     });
     it('Should get shoes from the database given certain specifications', async function () {
-
+        await pool.query('DELETE FROM shoes');
         let shoes = [{
             brand: 'Nike',
             color: 'Black',
