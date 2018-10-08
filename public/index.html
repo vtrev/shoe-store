@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     <script type="text/x-template" id="shoesTemplate">
+        <h1>{{messages.info}}</h1>
         {{#each shoes}}
         <div class=" col-4 inline-block card">
             <img src="{{this.img_link}}">
@@ -108,14 +109,12 @@
     </div>
     <div class="bg-modal" id="inCartModal">
         <div class="modal-contents">
-            <div class="closeShoeInCart">+</div>
             <p>Oops! This item is already in the cart</p>
             <button id="in-cart-btn" class="modal-ok-button"> Okay</button>
         </div>
     </div>
     <div class="bg-modal" id="noStockModal">
         <div class="modal-contents">
-            <div class="closeShoeInCart">+</div>
             <p>Sorry we out of stock :(</p>
             <button id="no-stock-btn" class="modal-ok-button">Okay</button>
         </div>

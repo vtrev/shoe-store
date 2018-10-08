@@ -90,6 +90,7 @@ module.exports = function (shoesInstance) {
         };
 
     }
+    //get the cart
     let cart = async function (req, res) {
         try {
             let result = await shoesInstance.getCart();
@@ -100,6 +101,22 @@ module.exports = function (shoesInstance) {
         } catch (err) {
             console.log(err)
         };
+    };
+    //update the cart, add or remove shoes
+    let updateCart = async function (req, res) {
+        console.log('updating cart...');
+        try {
+            let result = await shoesInstance.updateCart(undefined, 'clear');
+            console.log(result);
+            res.json({
+                status: 'success',
+                data: result
+            });
+
+        } catch (err) {
+            console.log(err)
+        };
+
     }
 
     return {
@@ -109,7 +126,8 @@ module.exports = function (shoesInstance) {
         brandSize,
         addShoe,
         updateQty,
-        cart
+        cart,
+        updateCart
 
     };
 };

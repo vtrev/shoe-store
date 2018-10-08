@@ -14,7 +14,7 @@ addBtnElement.addEventListener('click', function run() {
         addSpecs.size = addShoeSize;
         addSpecs.price = addShoePrice;
         addSpecs.qty = addShoeQty;
-        addSpecs["img-link"] = 0;
+        addSpecs["img_link"] = 0;
         axios.post('/api/shoes', addSpecs)
             .then(function (response) {
                 console.log(response);

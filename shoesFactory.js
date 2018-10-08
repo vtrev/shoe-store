@@ -66,14 +66,14 @@ module.exports = function ShoeServices(pool) {
             if (exists) {
                 return 'shoe already in store'
             } else {
-                let sql = 'INSERT INTO shoes (qty,price,size_id,brand_id,image_id,color_id) values ($1,$2,$3,$4,$5,$6);';
-                let params = [addSpecs.qty, addSpecs.price, shoeAddIds.sizeId, shoeAddIds.brandId, addSpecs['img-link'], shoeAddIds.colorId];
-                await pool.query(sql, params);
-                return 'shoe added successfully'
+                let sql = 'INSERT INTO shoes (qty,price,size_id,brand_id,image_id,color_id) values ($1,$2,$3,$4,$5,$6) RETURNING id;';
+                let params = [addSpecs.qty, addSpecs.price, shoeAddIds.sizeId, shoeAddIds.brandId, addSpecs['img_link'], shoeAddIds.colorId];
+                let result = await pool.query(sql, params);
+                return result.rows
             };
         };
     };
-
+    // reduce or gain stock during sales and shoe returns
     let updateStock = async function (shoeId, action) {
         if (action == 'reduce') {
             // check if the shoe is not already in the cart
@@ -104,13 +104,18 @@ module.exports = function ShoeServices(pool) {
             return 'failure'
         };
     };
-
+    //clear,remove or add shoes into the cart
     let updateCart = async function (shoeId, action) {
-        if (action == 'add') {
-            await pool.query('INSERT INTO cart (shoe_id) values ($1)', [shoeId]);
-        };
-        if (action == 'remove') {
-            await pool.query('DELETE FROM cart WHERE shoe_id=$1', [shoeId]);
+        if (!shoeId && action == 'clear') {
+            await pool.query('DELETE FROM cart');
+            return 'cartCleared'
+        } else {
+            if (action == 'add') {
+                await pool.query('INSERT INTO cart (shoe_id) values ($1)', [shoeId]);
+            };
+            if (action == 'remove') {
+                await pool.query('DELETE FROM cart WHERE shoe_id=$1', [shoeId]);
+            }
         };
     };
     let getCart = async function () {
@@ -131,8 +136,10 @@ module.exports = function ShoeServices(pool) {
     return {
         getAll,
         getBrandSize,
+        getIds,
         addShoe,
         updateStock,
-        getCart
+        getCart,
+        updateCart
     }
 };

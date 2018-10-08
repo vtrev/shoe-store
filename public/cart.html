@@ -9,7 +9,7 @@
     <script type="text/x-template" id="cartTemplate">
         {{#each shoes}}
         <div id="border" class=" col-4 inline-block card">
-            <img src="{{this.img-link}}">
+            <img src="{{this.img_link}}">
             <br> Brand : {{this.brand}}
             <br> Color : {{this.color}}
             <br>Size : {{this.size}}
@@ -56,9 +56,7 @@
             <a href="index.html">
                 <button>Continue Shopping</button>
             </a>
-
-            <button id="checkOutBtn">Checkout</button>
-
+            <button id="checkOutBtn" onclick="checkOut(this.value)">Checkout</button>
         </div>
     </div>
 </body>

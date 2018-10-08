@@ -36,7 +36,7 @@ let cartModalAction = function (modal, action) {
         document.querySelector(`#${modal}`).style.display = "flex";
     }
     if (action == 'deactivate') {
-        document.querySelector('.bg-modal').style.display = "none";
+        document.querySelector(`#${modal}`).style.display = "none";
     }
 }
 
@@ -73,9 +73,9 @@ searchBtnElement.addEventListener('click', function search() {
 });
 // EVENTS FOR MODALS
 inCartBtn.addEventListener('click', function () {
-    cartModalAction('modal', 'deactivate')
+    cartModalAction('inCartModal', 'deactivate')
 }, false)
 
 noStockBtn.addEventListener('click', function () {
-    cartModalAction('modal', 'deactivate')
+    cartModalAction('noStockModal', 'deactivate')
 }, false)

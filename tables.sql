@@ -73,6 +73,9 @@ INSERT INTO colors (color) values ('Yellow');
 INSERT INTO colors (color) values ('Blue');
 INSERT INTO colors (color) values ('Cream');
 INSERT INTO colors (color) values ('Black');
+INSERT INTO colors (color) values ('Brown');
+INSERT INTO colors (color) values ('Purple');
+INSERT INTO colors (color) values ('Orange');
 
 -- INSERT SIZES
 
@@ -92,10 +95,48 @@ INSERT INTO brands (brand) values ('Jordan');
 INSERT INTO brands (brand) values ('Pnp');
 INSERT INTO brands (brand) values ('Mrp');
 INSERT INTO brands (brand) values ('Converse');
+INSERT INTO brands (brand) values ('Soviet');
+INSERT INTO brands (brand) values ('Timberland');
+INSERT INTO brands (brand) values ('Puma');
+INSERT INTO brands (brand) values ('Nike');
+
+--INSERT LINKS TO IMAGES OF THE SHOES
+INSERT INTO images (id,img_link) values (0,'img/no-img.png')
+INSERT INTO images (img_link) values ('img/ad-black.jpg');
+INSERT INTO images (img_link) values ('img/ad-white.jpg');
+INSERT INTO images (img_link) values ('img/con-black.jpg');
+INSERT INTO images (img_link) values ('img/fila-green.jpg');
+INSERT INTO images (img_link) values ('img/jordan-cream.jpg');
+INSERT INTO images (img_link) values ('img/nike-black.png');
+INSERT INTO images (img_link) values ('img/nike-blue.jpg');
+INSERT INTO images (img_link) values ('img/nike-orange.jpg');
+INSERT INTO images (img_link) values ('img/puma-brwn.jpg');
+INSERT INTO images (img_link) values ('img/sov-purple.png');
+INSERT INTO images (img_link) values ('img/timbs-brwn.png');
 
 
 
 
--- INSERT THE SHOES INTO THE CATALOGUE
+--INSERT A DEFAULT CATALOGUE
 
-INSERT INTO shoes (qty,price,size_id,brand_id,image_id,color_id) values (10,999,5,1,1,8);
+INSERT into shoes(qty,price,size_id,brand_id,image_id,color_id) values(16,1500,7,1,2,1);
+
+INSERT into shoes(qty,price,size_id,brand_id,image_id,color_id) values(9,799,2,6,3,8);
+
+INSERT into shoes(qty,price,size_id,brand_id,image_id,color_id) values(50,299,7,2,4,3);
+
+INSERT into shoes(qty,price,size_id,brand_id,image_id,color_id) values(10,2999,6,3,5,7);
+
+INSERT into shoes(qty,price,size_id,brand_id,image_id,color_id) values(7,899,5,10,6,8);
+
+INSERT into shoes(qty,price,size_id,brand_id,image_id,color_id) values(15,560,4,10,7,6);
+
+INSERT into shoes(qty,price,size_id,brand_id,image_id,color_id) values(10,899,4,10,8,11);
+
+INSERT into shoes(qty,price,size_id,brand_id,image_id,color_id) values(50,699,5,9,9,7);
+
+INSERT into shoes(qty,price,size_id,brand_id,image_id,color_id) values(20,500,5,7,10,10);
+
+INSERT into shoes(qty,price,size_id,brand_id,image_id,color_id) values(15,2999,5,8,11,9);
+
+

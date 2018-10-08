@@ -1,0 +1,17 @@
+language: node_js
+
+services:
+  -postresql 
+env:
+     - DATABASE_URL=postgresql://postgres@localhost:5432/shoedb
+node_js:
+        - "8.0.0"
+
+before_script:
+  - psql -c 'create database  shoesdb;' -U postgres
+  - psql -U postgres -d shoesdb -a -f tables.sql
+
+addons:
+    apt:
+    packages:
+    - postgresql-server-dev-9.2

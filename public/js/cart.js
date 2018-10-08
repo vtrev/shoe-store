@@ -1,12 +1,11 @@
 let checkOutBtn = document.getElementById('checkOutBtn');
 
-
 // fetch the shoes in the cart then display them
 axios.get('api/shoes/cart').then(function (res) {
     displayCart(res.data.data);
 });
 
-// =============================DISPLAY THE SHOES IN THE CART ===============================================// 
+//DISPLAY THE SHOES IN THE CART 
 
 let displayCart = function (shoesToDisplay) {
     let cartData = {};
@@ -21,7 +20,7 @@ let displayCart = function (shoesToDisplay) {
     var cartHTML = cartTemplate(cartData);
     cartDataElement.innerHTML = cartHTML;
 };
-// ================================ REMOVE SHOE FROM CART ====================================================== //
+// REMOVE SHOE FROM CART 
 let removeFromCart = function (shoeId) {
     axios.post(`/api/shoes/sale/${shoeId}`, {
             shoeId,
@@ -35,36 +34,17 @@ let removeFromCart = function (shoeId) {
         .catch(function (error) {
             console.log(error);
         });
-
-
-
-
-
-
-
-
-
-    // let tmpCart = JSON.parse(localStorage.getItem('cart'));
-    // let shoeToRemove = shoes.getShoes({
-    //     id: item
-    // })[0];
-    // //overwrite the cart with itself excluding the shoe being removed
-    // try {
-    //     tmpCart = tmpCart.filter(function (shoe) {
-    //         return parseInt(item) !== shoe.id;
-    //     });
-    // } finally {
-    //     shoeToRemove.qty++;
-    //     localStorage.setItem('shoesData', JSON.stringify(shoesData));
-    //     localStorage.setItem('cart', JSON.stringify(tmpCart));
-    //     displayCart(tmpCart);
-    // }
 };
 
-// =========================================CHECKOUT==========================================================//
+//CHECKOUT
 
-checkOutBtn.addEventListener('click', function checkout() {
-    localStorage.setItem('cart', JSON.stringify([]));
-    displayCart([]);
-    alert('Proceeding to payment');
-});
+// REMOVE SHOE FROM CART 
+let checkOut = function () {
+    axios.post('/api/shoes/cart/')
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+};
