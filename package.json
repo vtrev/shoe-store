@@ -19,6 +19,7 @@
     "express-flash": "0.0.2",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
+    "mocha": "^5.2.0",
     "pg": "^7.5.0"
   }
 }
