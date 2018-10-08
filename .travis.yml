@@ -3,7 +3,7 @@ language: node_js
 services:
   -postresql 
 env:
-     - DATABASE_URL=postgresql://postgres@localhost:5432/shoedb
+     - DATABASE_URL=postgresql://postgres@localhost:5432/shoesdb
 node_js:
         - "8.0.0"
 
