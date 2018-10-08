@@ -1,4 +1,4 @@
--- CREATE TABLES
+-- CREATE TABLES FOR THE shoesdb
 CREATE TABLE brands
 (
     id serial  NOT NULL,
