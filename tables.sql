@@ -101,7 +101,7 @@ INSERT INTO brands (brand) values ('Puma');
 INSERT INTO brands (brand) values ('Nike');
 
 --INSERT LINKS TO IMAGES OF THE SHOES
-INSERT INTO images (id,img_link) values (0,'img/no-img.png')
+INSERT INTO images (id,img_link) values (0,'img/no-img.png');
 INSERT INTO images (img_link) values ('img/ad-black.jpg');
 INSERT INTO images (img_link) values ('img/ad-white.jpg');
 INSERT INTO images (img_link) values ('img/con-black.jpg');
