@@ -35,9 +35,13 @@ module.exports = function ShoeServices(pool) {
             return result.rows
         } else if (getSpecKeys.length == 2) {
             let filter1 = Object.keys(specs)[1];
-            sql = sql + ` AND ${filter1}_id=${specsIds[filter1+'Id']}`
-            let result = await pool.query(sql);
-            return result.rows
+
+            // find a way to remove order by on the sql string and then add the AND part and concat ordey by again :)
+            // sql = 
+            // sql + ` AND ${filter1}_id=${specsIds[filter1+'Id']}`;
+            console.log(sql);
+            // let result = await pool.query(sql);
+            // return result.rows
         };
     };
 
