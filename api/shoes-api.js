@@ -13,7 +13,6 @@ module.exports = function (shoesInstance) {
             console.log(err);
         };
     };
-
     let brand = async function (req, res) {
         let specs = {
             brand: req.params.brand
@@ -112,13 +111,11 @@ module.exports = function (shoesInstance) {
                 status: 'success',
                 data: result
             });
-
         } catch (err) {
             console.log(err)
         };
 
     }
-
     return {
         all,
         brand,

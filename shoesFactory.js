@@ -35,7 +35,7 @@ module.exports = function ShoeServices(pool) {
             return result.rows
         } else if (getSpecKeys.length == 2) {
             let filter1 = Object.keys(specs)[1];
-            // remove the order by from sql string , concatenate the condition and order
+            // remove the order by from sql string , concatenate the condition and order again
             sql = sql.substr(0, 230) + ` AND ${filter1}_id=${specsIds[filter1+'Id']} ORDER BY shoes.id`;
             let result = await pool.query(sql);
             return result.rows
@@ -74,33 +74,35 @@ module.exports = function ShoeServices(pool) {
     };
     // reduce or gain stock during sales and shoe returns
     let updateStock = async function (shoeId, action) {
+        // check if the shoe is not already in the cart
+        let checkQty = await pool.query('SELECT qty FROM shoes WHERE id=$1', [shoeId]);
+        let sql = 'UPDATE shoes SET qty = qty-1 WHERE id=$1';
+        let params = [shoeId];
         if (action == 'reduce') {
-            // check if the shoe is not already in the cart
             let checkCart = await pool.query('SELECT FROM cart WHERE shoe_id=$1', [shoeId]);
-            if (checkCart.rowCount == 0) {
-                // first check if the quantity is at least 1 and only reduce if true
-                let checkQty = await pool.query('SELECT qty FROM shoes WHERE id=$1', [shoeId]);
-                if (checkQty.rows[0].qty > 0) {
-                    let sql = 'UPDATE shoes SET qty = qty-1 WHERE id=$1';
-                    let params = [shoeId];
-                    await pool.query(sql, params);
-                    updateCart(shoeId, 'add');
-                    return 'addedToCart'
-                } else {
-                    return 'emptyStock'
-                };
-            } else if (checkCart.rowCount == 1) {
-                return 'shoeInCart'
+            if (checkCart.rowCount == 0 && checkQty.rows[0].qty > 0) {
+                await pool.query(sql, params);
+                await updateCart(shoeId, 'add');
+                return 'addedToCart'
+            } else if (checkQty.rows[0].qty == 0) {
+                return 'emptyStock'
             };
-        };
+            if (checkCart.rowCount == 1 && checkQty.rows[0].qty > 0) {
+                await pool.query(sql, params);
+                await updateCart(shoeId, 'update');
+                return 'cartUpdated'
+            };
+        }
         if (action == 'gain') {
-            let sql = 'UPDATE shoes SET qty = qty+1 WHERE id=$1';
+            let cartQtyQuery = await pool.query(`SELECT qty FROM cart WHERE shoe_id=${shoeId}`);
+            let cartQty = cartQtyQuery.rows[0].qty;
+            let sql = `UPDATE shoes SET qty = qty+${cartQty} WHERE id=$1`;
             let params = [shoeId];
             await pool.query(sql, params);
             await updateCart(shoeId, 'remove');
             return 'shoeRemoved'
         } else {
-            return 'failure'
+            return 'failed to gain'
         };
     };
     //clear,remove or add shoes into the cart
@@ -109,11 +111,14 @@ module.exports = function ShoeServices(pool) {
             await pool.query('DELETE FROM cart');
             return 'cartCleared'
         } else {
+            if (action == 'update') {
+                await pool.query(`UPDATE cart SET qty = qty+1 WHERE shoe_id=${shoeId}`)
+            }
             if (action == 'add') {
-                await pool.query('INSERT INTO cart (shoe_id) values ($1)', [shoeId]);
+                await pool.query(`INSERT INTO cart (shoe_id) values (${shoeId})`);
             };
             if (action == 'remove') {
-                await pool.query('DELETE FROM cart WHERE shoe_id=$1', [shoeId]);
+                await pool.query(`DELETE FROM cart WHERE shoe_id=${shoeId}`);
             }
         };
     };
