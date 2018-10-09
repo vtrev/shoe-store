@@ -31,8 +31,6 @@ let makeSelectors = function () {
                 brands,
                 sizes
             };
-            // let shoesData = {};
-            // shoesData['shoes'] = shoesToDisplay
             var searchBarElement = document.getElementById("search-bar");
             var searchBarTemplateSource = document.getElementById("search-bar-template").innerHTML;
             var searchBarTemplate = Handlebars.compile(searchBarTemplateSource);

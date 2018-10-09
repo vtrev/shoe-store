@@ -2,11 +2,7 @@ let checkOutBtn = document.getElementById('checkOutBtn');
 
 // fetch the shoes in the cart then display them
 let showCart = function () {
-    console.log('displaying cart')
     axios.get('api/shoes/cart').then(function (res) {
-        console.log('quering the api....');
-        console.log('the results will be printed in the next line');
-        console.log(res.data.data);
         displayCart(res.data.data);
     });
 };
@@ -42,9 +38,7 @@ let removeFromCart = function (shoeId) {
             console.log(error);
         });
 }
-
 //CHECKOUT
-
 // REMOVE SHOE FROM CART 
 let checkOut = function () {
     axios.post('/api/shoes/cart/')
