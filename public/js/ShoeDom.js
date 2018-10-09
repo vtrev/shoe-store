@@ -1,6 +1,58 @@
 let searchBtnElement = document.getElementById('searchButton');
 let inCartBtn = document.getElementById('in-cart-btn');
 let noStockBtn = document.getElementById('no-stock-btn');
+
+
+let makeSelectors = function () {
+    axios.get('/api/shoes').then(function (res) {
+        let shoes = res.data.data;
+        let brands = [];
+        let colors = [];
+        let sizes = [];
+        try {
+            for (let i = 0; i < shoes.length; i++) {
+                let shoeItem = shoes[i];
+                if (!brands.includes(shoeItem.brand)) {
+                    brands.push(shoeItem.brand);
+                };
+                if (!colors.includes(shoeItem.color)) {
+                    colors.push(shoeItem.color);
+                    colors = colors.sort();
+                };
+                if (!sizes.includes(shoeItem.size)) {
+                    sizes.push(shoeItem.size);
+                    sizes = sizes.sort((a, b) => a - b);
+                };
+            };
+
+        } finally {
+            let selectors = {
+                colors,
+                brands,
+                sizes
+            };
+            // let shoesData = {};
+            // shoesData['shoes'] = shoesToDisplay
+            var searchBarElement = document.getElementById("search-bar");
+            var searchBarTemplateSource = document.getElementById("search-bar-template").innerHTML;
+            var searchBarTemplate = Handlebars.compile(searchBarTemplateSource);
+            var searchHtml = searchBarTemplate(selectors);
+            searchBarElement.innerHTML = searchHtml;
+
+        };
+    });
+}
+makeSelectors()
+
+
+
+
+
+
+
+
+
+
 // a little halper that re-renders the template to keep data alive 
 let refresh = function () {
     let prevSpecs = localStorage.getItem('prevSpecs');
