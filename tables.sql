@@ -61,7 +61,7 @@ CREATE TABLE shoes
 -- CART TABLE THAT WILL KEEP TRACK OF THE SHOES IN THE CART
 CREATE TABLE cart(
     shoe_id integer NOT NULL,
-    qty integer NOT NULL
+    qty integer NOT NULL DEFAULT (0)
 );
 
 
