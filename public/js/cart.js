@@ -1,9 +1,17 @@
 let checkOutBtn = document.getElementById('checkOutBtn');
 
 // fetch the shoes in the cart then display them
-axios.get('api/shoes/cart').then(function (res) {
-    displayCart(res.data.data);
-});
+let showCart = function () {
+    console.log('displaying cart')
+    axios.get('api/shoes/cart').then(function (res) {
+        console.log('quering the api....');
+        console.log('the results will be printed in the next line');
+        console.log(res.data.data);
+        displayCart(res.data.data);
+    });
+};
+showCart()
+
 
 //DISPLAY THE SHOES IN THE CART 
 
@@ -27,14 +35,13 @@ let removeFromCart = function (shoeId) {
             action: 'gain'
         })
         .then(function (response) {
-
-
+            showCart();
             console.log(response);
         })
         .catch(function (error) {
             console.log(error);
         });
-};
+}
 
 //CHECKOUT
 

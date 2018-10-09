@@ -98,7 +98,7 @@ module.exports = function ShoeServices(pool) {
             let sql = 'UPDATE shoes SET qty = qty+1 WHERE id=$1';
             let params = [shoeId];
             await pool.query(sql, params);
-            updateCart(shoeId, 'remove');
+            await updateCart(shoeId, 'remove');
             return 'shoeRemoved'
         } else {
             return 'failure'
