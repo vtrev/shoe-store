@@ -19,7 +19,7 @@ module.exports = function ShoeServices(pool) {
     };
     // This methods fetch the shoes(s) from the database given the specifications object.
     let getAll = async function (specs) {
-        let sql = 'SELECT shoes.id,qty,price,brand,color,img_link,size from shoes join sizes on size_id=sizes.id join brands on shoes.brand_id=brands.id join colors on shoes.color_id=colors.id join images on shoes.image_id=images.id  ORDER BY brands.brand '
+        let sql = 'SELECT shoes.id,qty,price,brand,color,img_link,size from shoes join sizes on size_id=sizes.id join brands on shoes.brand_id=brands.id join colors on shoes.color_id=colors.id join images on shoes.image_id=images.id  ORDER BY shoes.id'
         let result = await pool.query(sql);
         return result.rows
     };
