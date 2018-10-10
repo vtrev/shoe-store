@@ -36,11 +36,11 @@ let removeFromCart = function (shoeId) {
             action: 'gain'
         })
         .then(function (response) {
-            console.log(response.data.data)
             if (response.data.data > 0) {
                 showCart();
             } else {
-                displayCart('Changed your mind? Checkout our new range under the new shoes section')
+                displayCart('Changed your mind? Checkout our new range under the new shoes section');
+                checkOutBtn.style.display = 'none';
             }
             console.log(response);
         })
