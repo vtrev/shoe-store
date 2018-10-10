@@ -36,20 +36,10 @@ let makeSelectors = function () {
             var searchBarTemplate = Handlebars.compile(searchBarTemplateSource);
             var searchHtml = searchBarTemplate(selectors);
             searchBarElement.innerHTML = searchHtml;
-
         };
     });
 }
 makeSelectors()
-
-
-
-
-
-
-
-
-
 
 // a little halper that re-renders the template to keep data alive 
 let refresh = function () {
