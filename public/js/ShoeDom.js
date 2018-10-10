@@ -87,7 +87,9 @@ let cartModalAction = function (modal, action) {
 }
 
 // cartModalAction('activate');
-
+// document.addEventListener("DOMContentLoaded", function(event) {
+//     console.log("DOM fully loaded and parsed");
+//   });
 searchBtnElement.addEventListener('click', function search() {
     let specs = {};
     specs.brand = document.getElementById('shoeBrand').value;
