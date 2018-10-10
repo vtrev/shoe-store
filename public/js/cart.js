@@ -43,6 +43,7 @@ let removeFromCart = function (shoeId) {
 let checkOut = function () {
     axios.post('/api/shoes/cart/')
         .then(function (response) {
+            showCart()
             console.log(response);
         })
         .catch(function (error) {

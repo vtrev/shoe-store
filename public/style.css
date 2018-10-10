@@ -284,7 +284,8 @@ input:active {
 }
 
 
-#addButton {
+#addButton,
+#checkOutBtn {
     width: 100px;
     height: 40px;
     border: none;
@@ -301,10 +302,9 @@ input:active {
     left: 1050;
 }
 
-
-
 #searchButton:hover,
-#addButton:hover {
+#addButton:hover,
+#checkOutBtn:hover {
     background-color: lime;
 }
 
