@@ -18,6 +18,10 @@ addBtnElement.addEventListener('click', function run() {
         axios.post('/api/shoes', addSpecs)
             .then(function (response) {
                 console.log(response);
+                if (response.data.data[0].id) {
+                    alert('shoe added');
+                    location.reload();
+                }
             })
             .catch(function (error) {
                 console.log(error);

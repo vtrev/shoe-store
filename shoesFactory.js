@@ -28,15 +28,14 @@ module.exports = function ShoeServices(pool) {
         let getSpecKeys = Object.keys(specs);
         let specsIds = await getIds(specs);
         let filter = Object.keys(specs)[0];
-        let sql = `SELECT shoes.id,qty,price,brand,color,img_link,size from shoes join sizes on size_id=sizes.id join brands on shoes.brand_id=brands.id join colors on shoes.color_id=colors.id join images on shoes.image_id=images.id WHERE ${filter}_id=${specsIds[filter + 'Id']} ORDER BY shoes.id`;
-
+        let sql = `SELECT shoes.id,qty,price,brand,color,img_link,size from shoes join sizes on size_id=sizes.id join brands on shoes.brand_id=brands.id join colors on shoes.color_id=colors.id join images on shoes.image_id=images.id WHERE ${filter}_id=${specsIds[filter + 'Id']}    ORDER BY shoes.id`;
         if (getSpecKeys.length == 1) {
             let result = await pool.query(sql);
             return result.rows
         } else if (getSpecKeys.length == 2) {
             let filter1 = Object.keys(specs)[1];
-            // remove the order by from sql string , concatenate the condition and order again
-            sql = sql.substr(0, 230) + ` AND ${filter1}_id=${specsIds[filter1+'Id']} ORDER BY shoes.id`;
+            // remove the order by from sql string , concatenate the condition and order again.The empty spaces on the sql query are intentional to accomodate future Ids with 4digits
+            sql = sql.substr(0, 234) + ` AND ${filter1}_id=${specsIds[filter1+'Id']} ORDER BY shoes.id`;
             let result = await pool.query(sql);
             return result.rows
         };
@@ -98,7 +97,8 @@ module.exports = function ShoeServices(pool) {
             let cartQty = cartQtyQuery.rows[0].qty;
             await pool.query(`UPDATE shoes SET qty = qty+${cartQty} WHERE id=${shoeId}`);
             await updateCart(shoeId, 'remove');
-            return 'shoeRemoved'
+            let cartLength = await pool.query('SELECT shoe_id FROM cart');
+            return cartLength.rows.length
         } else {
             return 'failed to gain'
         };
@@ -116,7 +116,13 @@ module.exports = function ShoeServices(pool) {
                 await pool.query(`INSERT INTO cart (shoe_id) values (${shoeId})`);
             };
             if (action == 'remove') {
-                await pool.query(`DELETE FROM cart WHERE shoe_id=${shoeId}`);
+                let shoesInCart = await pool.query(`SELECT qty FROM cart WHERE shoe_id=${shoeId}`);
+                if (shoesInCart.rows[0].qty > 1) {
+                    await pool.query(`UPDATE cart SET qty = qty-1 WHERE shoe_id=${shoeId}`)
+                } else if (shoesInCart.rows[0].qty == 1) {
+                    await pool.query(`DELETE FROM cart WHERE shoe_id=${shoeId}`);
+                }
+
             }
         };
     };

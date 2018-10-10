@@ -3,7 +3,12 @@ let checkOutBtn = document.getElementById('checkOutBtn');
 // fetch the shoes in the cart then display them
 let showCart = function () {
     axios.get('api/shoes/cart').then(function (res) {
-        displayCart(res.data.data);
+        if (res.data.data.length == 0) {
+            displayCart('Sorry you have not added any items to the cart :(')
+        } else {
+            displayCart(res.data.data);
+        }
+
     });
 };
 showCart()
@@ -31,7 +36,12 @@ let removeFromCart = function (shoeId) {
             action: 'gain'
         })
         .then(function (response) {
-            showCart();
+            console.log(response.data.data)
+            if (response.data.data > 0) {
+                showCart();
+            } else {
+                displayCart('Changed your mind? Checkout our new range under the new shoes section')
+            }
             console.log(response);
         })
         .catch(function (error) {
@@ -43,8 +53,11 @@ let removeFromCart = function (shoeId) {
 let checkOut = function () {
     axios.post('/api/shoes/cart/')
         .then(function (response) {
-            showCart()
-            console.log(response);
+            // showCart()
+            if (response.data.data == "cartCleared") {
+                displayCart('Thanks for shopping with us, have a lovely day!')
+                checkOutBtn.style.display = 'none';
+            }
         })
         .catch(function (error) {
             console.log(error);
