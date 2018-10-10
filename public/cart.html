@@ -15,7 +15,9 @@
             <br>Size : {{this.size}}
             <br>Price : R{{this.price}}
             <br> Items in cart: {{this.qty}}
-            <br>Total Price : R{{this.TotalPrice}}
+            <br>
+            Total : R{{this.TotalPrice}}
+            <br>
             <button value={{this.id}} onclick="removeFromCart(this.value)">
                 <i class="fas fa-minus-circle"></i>
             </button>
@@ -53,7 +55,6 @@
     <div id="cartArea" class="row center"></div>
     <div class="row">
         <div class="col-12  center">
-            <hr>
             <a href="index.html">
                 <button>Continue Shopping</button>
             </a>
