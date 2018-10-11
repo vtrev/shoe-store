@@ -103,7 +103,6 @@ searchBtnElement.addEventListener('click', function search() {
         localStorage.setItem('prevSpecs', route);
     };
 });
-
 // EVENTS FOR MODALS
 noStockBtn.addEventListener('click', function () {
     document.querySelector('#noStockModal').style.display = "none";
