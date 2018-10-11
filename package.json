@@ -22,5 +22,8 @@
     "express-session": "^1.15.6",
     "mocha": "^5.2.0",
     "pg": "^7.5.0"
+  },
+  "devDependencies": {
+    "supertest": "^3.3.0"
   }
 }
