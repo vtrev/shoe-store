@@ -401,6 +401,10 @@ nav a:hover {
     margin-right: 50px;
 }
 
+.color-drop-down {
+    display: none;
+}
+
 /* END OF NAVIGATION */
 
 /* Shoes Area */
