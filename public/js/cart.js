@@ -13,9 +13,7 @@ let showCart = function () {
 };
 showCart()
 
-
 //DISPLAY THE SHOES IN THE CART 
-
 let displayCart = function (shoesToDisplay) {
     let cartData = {};
     if (typeof (shoesToDisplay) == 'object') {
@@ -47,13 +45,11 @@ let removeFromCart = function (shoeId) {
         .catch(function (error) {
             console.log(error);
         });
-}
+};
 //CHECKOUT
-// REMOVE SHOE FROM CART 
 let checkOut = function () {
     axios.post('/api/shoes/cart/')
         .then(function (response) {
-            // showCart()
             if (response.data.data == "cartCleared") {
                 displayCart('Thanks for shopping with us, have a lovely day!')
                 checkOutBtn.style.display = 'none';

@@ -106,7 +106,6 @@ searchBtnElement.addEventListener('click', function search() {
 });
 
 // EVENTS FOR MODALS
-
 noStockBtn.addEventListener('click', function () {
     document.querySelector('#noStockModal').style.display = "none";
 }, false)
