@@ -3,12 +3,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const Shoes = require('./shoesFactory');
-// const router = require('./routes');
 const ShoesAPI = require('./api/shoes-api');
 
 const app = express();
 const session = require('express-session');
 const flash = require('express-flash');
+const cors = require('cors')
+app.use(cors());
 
 
 // DB Setup
@@ -30,7 +31,6 @@ const pool = new Pool({
 });
 
 const shoesInstance = Shoes(pool);
-// const route = router(shoesInstance);
 const shoeAPI = ShoesAPI(shoesInstance);
 // app use
 app.use(session({
