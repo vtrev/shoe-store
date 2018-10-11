@@ -1,8 +1,7 @@
 let searchBtnElement = document.getElementById('searchButton');
-let inCartBtn = document.getElementById('in-cart-btn');
 let noStockBtn = document.getElementById('no-stock-btn');
 
-
+//create drop down selectors with data from the api
 let makeSelectors = function () {
     axios.get('/api/shoes').then(function (res) {
         let shoes = res.data.data;
@@ -40,7 +39,6 @@ let makeSelectors = function () {
     });
 }
 makeSelectors()
-
 // a little halper that re-renders the template to keep data alive 
 let refresh = function () {
     let prevSpecs = localStorage.getItem('prevSpecs');
@@ -54,10 +52,8 @@ let addToCart = function (shoeId) {
             action: 'reduce'
         })
         .then(function (response) {
-            if (response.data.data == 'shoeInCart') {
-                cartModalAction('inCartModal', 'activate')
-            } else if (response.data.data == "emptyStock") {
-                cartModalAction('noStockModal', 'activate')
+            if (response.data.data == "emptyStock") {
+                document.querySelector('#noStockModal').style.display = "flex";
             }
             refresh();
             console.log(response);
@@ -76,62 +72,41 @@ let displayShoes = function (shoesToDisplay) {
     shoesDataElement.innerHTML = shoesHTML;
 };
 
-let cartModalAction = function (modal, action) {
-    if (action == 'activate') {
-        // document.querySelector('#inCartModal').style.display = "flex";
-        document.querySelector(`#${modal}`).style.display = "flex";
-    }
-    if (action == 'deactivate') {
-        document.querySelector(`#${modal}`).style.display = "none";
-    }
-}
-
-// cartModalAction('activate');
-// document.addEventListener("DOMContentLoaded", function(event) {
-//     console.log("DOM fully loaded and parsed");
-//   });
 searchBtnElement.addEventListener('click', function search() {
     let specs = {};
     specs.brand = document.getElementById('shoeBrand').value;
     specs.color = document.getElementById('shoeColor').value;
     specs.size = document.getElementById('shoeSize').value;
-    try {
-        if (specs.brand == 'null' && specs.size == 'null') {
-            let route = 'api/shoes';
-            axios.get(route).then(function (res) {
-                displayShoes(res.data.data);
-            });
-            localStorage.setItem('prevSpecs', route);
-        } else if (specs.brand !== 'null' && specs.size == 'null') {
-            let route = `api/shoes/brand/${specs.brand}`;
-            axios.get(route).then(function (res) {
-                displayShoes(res.data.data);
-            });
-            localStorage.setItem('prevSpecs', route);
-        } else if (specs.brand !== 'null' && specs.size !== 'null') {
-            let route = `api/shoes/brand/${specs.brand}/size/${specs.size}`;
-            axios.get(route).then(function (res) {
-                displayShoes(res.data.data)
-            });
-            localStorage.setItem('prevSpecs', route);
-        } else if (specs.brand == 'null' && specs.size !== 'null') {
-            let route = `api/shoes/size/${specs.size}`;
-            axios.get(route).then(function (res) {
-                displayShoes(res.data.data)
-            });
-            localStorage.setItem('prevSpecs', route);
-        };
-    } finally {
 
-
-    }
-
+    if (specs.brand == 'null' && specs.size == 'null') {
+        let route = 'api/shoes';
+        axios.get(route).then(function (res) {
+            displayShoes(res.data.data);
+        });
+        localStorage.setItem('prevSpecs', route);
+    } else if (specs.brand !== 'null' && specs.size == 'null') {
+        let route = `api/shoes/brand/${specs.brand}`;
+        axios.get(route).then(function (res) {
+            displayShoes(res.data.data);
+        });
+        localStorage.setItem('prevSpecs', route);
+    } else if (specs.brand !== 'null' && specs.size !== 'null') {
+        let route = `api/shoes/brand/${specs.brand}/size/${specs.size}`;
+        axios.get(route).then(function (res) {
+            displayShoes(res.data.data)
+        });
+        localStorage.setItem('prevSpecs', route);
+    } else if (specs.brand == 'null' && specs.size !== 'null') {
+        let route = `api/shoes/size/${specs.size}`;
+        axios.get(route).then(function (res) {
+            displayShoes(res.data.data)
+        });
+        localStorage.setItem('prevSpecs', route);
+    };
 });
+
 // EVENTS FOR MODALS
-inCartBtn.addEventListener('click', function () {
-    cartModalAction('inCartModal', 'deactivate')
-}, false)
 
 noStockBtn.addEventListener('click', function () {
-    cartModalAction('noStockModal', 'deactivate')
+    document.querySelector('#noStockModal').style.display = "none";
 }, false)
