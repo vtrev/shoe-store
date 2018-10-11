@@ -23,7 +23,6 @@ let makeSelectors = function () {
                     sizes = sizes.sort((a, b) => a - b);
                 };
             };
-
         } finally {
             let selectors = {
                 colors,
