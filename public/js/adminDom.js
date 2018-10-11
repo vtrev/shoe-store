@@ -1,31 +1,41 @@
-let addBtnElement = document.getElementById('addButton');
+// get elements from the HTML
+let addBtnElement = document.querySelector('#addButton');
+let addShoeBrand = document.querySelector('#addShoeBrand');
+let addShoeColor = document.querySelector('#addShoeColor');
+let addShoeSize = document.querySelector('#addShoeSize');
+let addShoeQty = document.querySelector('#addShoeQty');
+let addShoePrice = document.querySelector('#addShoePrice');
+let modalOkay = document.querySelector('.modal-ok-button');
 
-
-addBtnElement.addEventListener('click', function run() {
-    let addShoeBrand = document.getElementById('addShoeBrand').value;
-    let addShoeColor = document.getElementById('addShoeColor').value;
-    let addShoeSize = document.getElementById('addShoeSize').value;
-    let addShoeQty = document.getElementById('addShoeQty').value;
-    let addShoePrice = document.getElementById('addShoePrice').value;
+// take values and send shoe to the server side
+let sendShoe = function () {
     let addSpecs = {};
-    if ((addShoeBrand !== "null") && (addShoeColor !== "null") && (addShoeSize !== "null") && (addShoeQty !== "") && (addShoePrice !== "")) {
-        addSpecs.brand = addShoeBrand;
-        addSpecs.color = addShoeColor;
-        addSpecs.size = addShoeSize;
-        addSpecs.price = addShoePrice;
-        addSpecs.qty = addShoeQty;
-        addSpecs["img_link"] = 0;
+    addSpecs.brand = addShoeBrand.value;
+    addSpecs.color = addShoeColor.value;
+    addSpecs.size = addShoeSize.value;
+    addSpecs.price = addShoePrice.value;
+    addSpecs.qty = addShoeQty.value;
+    addSpecs["img_link"] = 0;
+
+
+    if (Object.values(addSpecs).includes("")) {
+        //just do nothing
+        // even if ragex will handle empty values,code must not query with empty values
+        //since the submit method will still run
+        //this if statement will stop the code from querying
+    } else {
         axios.post('/api/shoes', addSpecs)
             .then(function (response) {
-                console.log(response);
                 if (response.data.data[0].id) {
-                    alert('shoe added');
-                    location.reload();
+                    document.getElementById('shoeAddedModal').style.display = "flex";
                 }
             })
             .catch(function (error) {
                 console.log(error);
             });
-    };
-
-});
+    }
+};
+modalOkay.addEventListener('click', function () {
+    document.getElementById('shoeAddedModal').style.display = "none";
+    location.reload();
+}, false)

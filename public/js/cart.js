@@ -4,11 +4,11 @@ let checkOutBtn = document.getElementById('checkOutBtn');
 let showCart = function () {
     axios.get('api/shoes/cart').then(function (res) {
         if (res.data.data.length == 0) {
+            checkOutBtn.style.display = 'none';
             displayCart('Sorry you have not added any items to the cart :(')
         } else {
             displayCart(res.data.data);
-        }
-
+        };
     });
 };
 showCart()

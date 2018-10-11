@@ -27,76 +27,42 @@
 <body>
     <div class="row fisrtP">
         <div class="col-12 center">
-            <p>This page here allows the admin to add more shoes into the catalogue</p>
+            <h3>Hello there, use the input fields below to add a new shoe to the stock.</h3>
         </div>
     </div>
-    <div class="row admin-bar">
-        <div class="col-2">
-            <select id="addShoeBrand" class="inline-block">
-                <option value="null">Select Brand</option>
-                <option class="" id="" value="Adidas">Adidas</option>
-                <option class="" id="" value="Converse">Converse</option>
-                <option class="" id="" value="Fila">Fila</option>
-                <option class="" id="" value="Jordan">Jordan </option>
-                <option class="" id="" value="Nike">Nike</option>
-                <option class="" id="" value="Puma">Puma</option>
-                <option class="" id="" value="Soviet">Soviet</option>
-                <option class="" id="" value="Timberland">Timberland</option>
-                <option class="" id="" value="Vans">Vans</option>
-                <option class="" id="" value="Zara">Zara</option>
-
-            </select>
-        </div>
-        <div class="col-2">
-            <select id="addShoeColor" class="inline-block select">
-                <option value="null">Select Color</option>
-                <option class="" id="" value="Black">Black</option>
-                <option class="" id="" value="Blue">Blue</option>
-                <option class="" id="" value="Brown">Brown</option>
-                <option class="" id="" value="Cream">Cream</option>
-                <option class="" id="" value="Green">Green</option>
-                <option class="" id="" value="Orange">Orange</option>
-                <option class="" id="" value="Pink">Pink</option>
-                <option class="" id="" value="Purple">Purple</option>
-                <option class="" id="" value="White">White</option>
-                <option class="" id="" value="Yellow">Yellow</option>
-
-
-            </select>
-        </div>
-        <div class="col-2">
-            <select id="addShoeSize" class="inline-block">
-                <option value="null">Select Size</option>
-                <option class="" id="" value="1">1</option>
-                <option class="" id="" value="2">2</option>
-                <option class="" id="" value="3">3</option>
-                <option class="" id="" value="4">4</option>
-                <option class="" id="" value="5">5</option>
-                <option class="" id="" value="6">6</option>
-                <option class="" id="" value="7">7</option>
-                <option class="" id="" value="8">8</option>
-                <option class="" id="" value="9">9</option>
-                <option class="" id="" value="10">10</option>
-                <option class="" id="" value="11">11</option>
-                <option class="" id="" value="12">12</option>
-                <option class="" id="" value="13">13</option>
-
-            </select>
-        </div>
-        <div class="col-2 ">
-            <span class="admin-bar-text"></span>
-            <input type="number" id="addShoePrice" placeholder="Shoe Price">
-        </div>
-        <div class="col-2">
-            <span class="admin-bar-text"></span>
-            <input id="addShoeQty" type="number" placeholder="Shoe Quantity">
-        </div>
-        <div class="col-2">
-            <button id="addButton">
-                <i class="fas fa-plus"></i> Add Shoe</button>
+    <div class="bg-modal" id="shoeAddedModal">
+        <div class="modal-contents">
+            <p>Thanks! Your shoe has been added to the catalogue!</p>
+            <button id="shoe-added-btn" class="modal-ok-button"> Okay</button>
         </div>
     </div>
+    <form onsubmit="return false">
+        <div class="row admin-bar">
+            <div class="col-2">
+                <input id="addShoeBrand" class="inline-block" placeholder="Enter Brand" type="text" required pattern="[A-Za-z]+"
+                    title="E.g Abibas,Mike,Covert,Simbaland">
+            </div>
+            <div class="col-2">
+                <input id="addShoeColor" class="inline-block" placeholder="Enter Color" type="text" required pattern="[A-Za-z]+"
+                    title="E.g Green,Blue,Black,White">
+            </div>
+            <div class="col-2">
+                <input id="addShoeSize" class="inline-block" type="number" placeholder="Enter Size" title="E.g 5,3,2"
+                    pattern="[0-9]+">
+            </div>
+            <div class="col-2 ">
+                <input id="addShoePrice" type="number" placeholder="Shoe Price" required pattern="[0-9.]+" title="E.g 399.99,400,1050">
+            </div>
+            <div class="col-2">
+                <input id="addShoeQty" type="number" placeholder="Shoe Quantity" required pattern="[0-9]+" title="E.g 56,10,22">
+            </div>
+            <div class="col-2">
+                <input id="addButton" type="submit" onclick="sendShoe()">
+            </div>
+        </div>
+    </form>
     </div>
+
 
 </body>
 <script type="text/javascript" src="js/ShoeFactory.js"></script>

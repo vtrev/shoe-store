@@ -274,9 +274,18 @@ input:active {
     font-size: 15px;
 }
 
-#new-shoe-price {
-    /* width: ; */
-    /* height: ; */
+
+/* PLACE HOLDER TEXT */
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1;
+    /* Firefox */
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: white;
 }
 
 .fisrtP div:first-of-type {
@@ -326,7 +335,10 @@ input:active {
 
 select,
 #addShoePrice,
-#addShoeQty {
+#addShoeQty,
+#addShoeBrand,
+#addShoeColor,
+#addShoeSize {
     margin: 0 10px;
     background-color: #4FA2F5;
     width: 200px;
@@ -337,10 +349,6 @@ select,
     border-radius: 2px;
 }
 
-#addShoePrice,
-#addShoeQty {
-    width: 100%;
-}
 
 a {
     text-decoration: none;
