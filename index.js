@@ -34,7 +34,7 @@ const shoesInstance = Shoes(pool);
 const shoeAPI = ShoesAPI(shoesInstance);
 // app use
 app.use(session({
-    secret: 'Tshimugaramafatha'
+    secret: "Luke, I'm not your father"
 }));
 app.use(flash());
 app.engine('handlebars', exphbs({
@@ -63,3 +63,5 @@ const PORT = process.env.PORT || 3030;
 app.listen(PORT, function () {
     console.log('ShoeAPI app running on port : ', PORT)
 });
+
+module.exports = app;

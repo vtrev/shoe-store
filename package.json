@@ -7,14 +7,15 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha",
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "mocha --exit"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "express-flash": "0.0.2",
