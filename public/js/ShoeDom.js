@@ -37,7 +37,7 @@ let makeSelectors = function () {
         };
     });
 }
-makeSelectors()
+
 // a little halper that re-renders the template to keep data alive 
 let refresh = function () {
     let prevSpecs = localStorage.getItem('prevSpecs');
@@ -106,7 +106,9 @@ let search = function () {
 };
 
 
-
+// make selectors and display the shoes
+makeSelectors();
+refresh();
 
 
 
