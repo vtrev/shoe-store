@@ -7,22 +7,17 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
-<div class="row" id="nav-col">
-    <div class="col-4">
-        <a href="index.html">
-            <img src="img/logo.png">
-        </a>
-    </div>
-    <div class="col-8 center">
-        <nav>
-            <a class="" href="index.html">Home</a>
-            <a href="cart.html">Cart</a>
-            <a href="#">Admin</a>
-        </nav>
-    </div>
+
+<div class="nav" id="nav-bar">
+    <a class="" href="./index.html">Home</a>
+    <a href="./cart.html">Cart</a>
+    <a href="#">Admin</a>
+    <a href="javascript:void(0);" class="icon" onclick="toogleNav()">
+        <i class="fa fa-bars"></i>
+    </a>
 </div>
 
-<body>
+<body class="center">
     <div class="row fisrtP">
         <div class="col-12 center">
             <h3>Hello there, use the input fields below to add a new shoe to the stock.</h3>
@@ -35,18 +30,18 @@
         </div>
     </div>
     <form onsubmit="return false">
-        <div class="row admin-bar">
-            <div class="col-2">
-                <input id="addShoeBrand" class="inline-block" placeholder="Enter Brand" type="text" required pattern="[A-Za-z]+"
+        <div class="row center inline-block">
+            <div class="col-2 ">
+                <input id="addShoeBrand" class="" placeholder="Enter Brand" type="text" required pattern="[A-Za-z]+"
                     title="E.g Abibas,Mike,Covert,Simbaland">
             </div>
             <div class="col-2">
-                <input id="addShoeColor" class="inline-block" placeholder="Enter Color" type="text" required pattern="[A-Za-z]+"
+                <input id="addShoeColor" class="" placeholder="Enter Color" type="text" required pattern="[A-Za-z]+"
                     title="E.g Green,Blue,Black,White">
             </div>
             <div class="col-2">
-                <input id="addShoeSize" class="inline-block" type="number" placeholder="Enter Size" title="E.g 5,3,2"
-                    required pattern="[0-9]+">
+                <input id="addShoeSize" class="" type="number" placeholder="Enter Size" title="E.g 5,3,2" required
+                    pattern="[0-9]+">
             </div>
             <div class="col-2 ">
                 <input id="addShoePrice" type="number" placeholder="Shoe Price" required pattern="[0-9.]+" title="E.g 399.99,400,1050">
@@ -61,7 +56,7 @@
     </form>
     </div>
 </body>
-<script type="text/javascript" src="js/ShoeFactory.js"></script>
-<script type="text/javascript" src="js/adminDom.js"></script>
+<script type="text/javascript" src="./js/sharedMethods.js"></script>
+<script type="text/javascript" src="./js/adminDom.js"></script>
 
 </html>

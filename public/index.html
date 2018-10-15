@@ -30,22 +30,29 @@
     </script>
 
 </head>
-<div class="row" id="nav-col">
+
+<!-- <div class="row">
     <div class="col-4">
-        <a href="index.html">
+        <a href="index.html" id="logo">
             <img src="img/logo.png">
         </a>
+
     </div>
-    <div class="col-8 center">
-        <nav>
-            <a class="" href="#">Home</a>
-            <a href="cart.html">Cart</a>
-            <a href="admin.html">Admin</a>
-        </nav>
-    </div>
+
+</div> -->
+
+<div class="nav" id="nav-bar">
+    <a href="#">Home</a>
+    <a href="cart.html">Cart</a>
+    <a href="admin.html">Admin</a>
+    <a href="javascript:void(0);" class="icon" onclick="toogleNav()">
+        <i class="fa fa-bars"></i>
+    </a>
 </div>
 
-<body>
+
+
+<body class="center">
     <script type="text/x-template" id="search-bar-template">
         <div class="col-3">
                 <select id="shoeBrand" class="inline-block">
@@ -91,7 +98,8 @@
             <button id="no-stock-btn" class="modal-ok-button">Okay</button>
         </div>
     </div>
-    <script type="text/javascript" src="js/ShoeDom.js"></script>
+    <script type="text/javascript" src="./js/sharedMethods.js"></script>
+    <script type="text/javascript" src="./js/ShoeDom.js"></script>
 </body>
 
 </html>

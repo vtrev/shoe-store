@@ -8,6 +8,7 @@ const connectionString = process.env.DATABASE_URL || 'postgresql://postgres:pass
 const pool = new Pool({
     connectionString
 });
+
 const shoeInstance = Shoes(pool);
 
 // super test setup

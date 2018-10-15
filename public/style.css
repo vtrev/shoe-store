@@ -21,7 +21,7 @@ body {
 
 * {
     font-family: 'Lato', Helvetica, sans-serif;
-    color: #333447;
+    /* color: #333447; */
     line-height: 1.5;
 }
 
@@ -341,7 +341,7 @@ select,
 #addShoeSize {
     margin: 0 10px;
     background-color: #4FA2F5;
-    width: 200px;
+    width: 90%;
     height: 50px;
     font-size: 20px;
     color: black;
@@ -367,41 +367,51 @@ header {}
 
 /* NAVIGATION BAR */
 
-#nav-col {
-    /* float: right; */
-    height: 90px;
-    width: 100%;
-    position: fixed;
-    top: 0;
+/* Add a black background color to the top navigation */
+.nav {
     background-color: black;
-    padding: 0;
-    z-index: 99;
+    overflow: hidden;
+    /* min-height: 50px; */
 }
 
-nav a {
+
+/* Style the links inside the navigation bar */
+.nav a {
+    /* margin: 10px 20px; */
+    /* float: right; */
     display: inline-block;
-    margin-top: 10px;
-    padding: 10px 10px 0px;
-    font-size: 20px;
-    color: white;
-    width: 10%;
-    height: 50%;
+    color: #f2f2f2;
     text-align: center;
-    text-transform: uppercase;
+    padding: 15px 18px;
+    text-decoration: none;
+    font-size: 20px;
 }
 
-nav a:hover {
-    color: black;
+/* Change the color of links on hover */
+.nav a:hover {
     background-color: #4FA2F5;
-    /* border: 1px solid black; */
-    border-radius: 10px;
+    color: black;
 }
 
-#nav-col img {
-    margin-right: 50px;
+/* Hide the link that should open and close the topnav on small screens */
+.nav .icon {
+    display: none;
 }
 
-.color-drop-down {
+
+#logo {
+    float: left;
+    /* background: black; */
+    margin: 0 auto;
+    /* margin-right: -300px; */
+
+}
+
+#logo:hover {
+    background: none;
+}
+
+*/ .color-drop-down {
     display: none;
 }
 
@@ -411,7 +421,6 @@ nav a:hover {
 
 #shoesArea {
     margin-top: 80px;
-    /* border: 1px solid black; */
     width: 99%;
     height: 500px;
     /* matcth the height with the card height after making card */
@@ -522,3 +531,37 @@ input {
     color: lime;
     border: 2px solid lime;
 } */
+
+/* MEDIA QUERIES */
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+@media screen and (max-width: 600px) {
+    .nav a {
+        display: none;
+    }
+
+    .nav a.icon {
+        float: left;
+        display: block;
+    }
+}
+
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: 600px) {
+    .nav.responsive {
+        position: relative;
+    }
+
+    .nav.responsive a.icon {
+        color: white;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .nav.responsive a {
+        float: none;
+        display: block;
+        text-align: center;
+    }
+}
