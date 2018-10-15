@@ -1,7 +1,8 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./simple-grid.min.css">
+    <link rel="stylesheet" href="./style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
@@ -18,7 +19,56 @@
 </div>
 
 <body class="center">
-    <div class="row fisrtP">
+    <div class="add-shoe-form-container">
+        <h1>New shoe stock</h1>
+        <form class="add-shoe-form" onsubmit="return false">
+            <fieldset class="center">
+                <legend>
+                    <span>Shoe details</span>
+                </legend>
+                <div>
+                    <label for="addShoeBrand"><strong class="mandatory">*</strong>Brand</label>
+                    <input id="addShoeBrand" class="input-area" placeholder="Enter shoe brand" type="text" required
+                        pattern="[A-Za-z]+" title="E.g Abibas,Mike,Covert,Simbaland">
+                </div>
+                <div>
+                    <label for="addShoeColor"><strong class="mandatory">*</strong>Color</label>
+                    <input id="addShoeColor" class="input-area" placeholder="Enter shoe color" type="text" required
+                        pattern="[A-Za-z]+" title="E.g Green,Blue,Black,White">
+                </div>
+                <div>
+                    <label for="addShoeSize"><strong class="mandatory">*</strong>Size</label>
+                    <input id="addShoeSize" class="input-area" type="number" placeholder="Enter shoe size" title="E.g 5,3,2"
+                        required pattern="[0-9]+">
+                </div>
+                <div>
+                    <label for="addShoePrice"><strong class="mandatory">*</strong>Price</label>
+                    <input id="addShoePrice" type="number" class="input-area" placeholder="Enter shoe price" required
+                        pattern="[0-9.]+" title="E.g 399.99,400,1050">
+                </div>
+                <div>
+                    <label for="addShoeQty"><strong class="mandatory">*</strong>Quantity</label>
+                    <input id="addShoeQty" type="number" class="input-area" placeholder="Enter quantity" required
+                        pattern="[0-9]+" title="E.g 56,10,22">
+                </div>
+                <br>
+                <div class="center"> <input id="addButton" type="submit" onclick="sendShoe()"></div>
+            </fieldset>
+        </form>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div class="row fisrtP">
         <div class="col-12 center">
             <h3>Hello there, use the input fields below to add a new shoe to the stock.</h3>
         </div>
@@ -53,8 +103,9 @@
                 <input id="addButton" type="submit" onclick="sendShoe()">
             </div>
         </div>
-    </form>
-    </div>
+        </div>
+    </form> -->
+
 </body>
 <script type="text/javascript" src="./js/sharedMethods.js"></script>
 <script type="text/javascript" src="./js/adminDom.js"></script>
