@@ -1,4 +1,4 @@
-let searchBtnElement = document.getElementById('searchButton');
+let searchBtnElement = document.querySelectorAll('.searchButton');
 let noStockBtn = document.getElementById('no-stock-btn');
 
 //create drop down selectors with data from the api
@@ -53,6 +53,7 @@ let addToCart = function (shoeId) {
         .then(function (response) {
             if (response.data.data == "emptyStock") {
                 document.querySelector('#noStockModal').style.display = "flex";
+                scrollWindow();
             }
             refresh();
             console.log(response);
@@ -71,7 +72,7 @@ let displayShoes = function (shoesToDisplay) {
     shoesDataElement.innerHTML = shoesHTML;
 };
 
-searchBtnElement.addEventListener('click', function search() {
+let search = function () {
     let specs = {};
     specs.brand = document.getElementById('shoeBrand').value;
     specs.color = document.getElementById('shoeColor').value;
@@ -102,7 +103,7 @@ searchBtnElement.addEventListener('click', function search() {
         });
         localStorage.setItem('prevSpecs', route);
     };
-});
+};
 
 
 

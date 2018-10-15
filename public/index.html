@@ -9,7 +9,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     <script type="text/x-template" id="shoesTemplate">
-        <h1>{{messages.info}}</h1>
+
         {{#each shoes}}
         <div class=" col-4 inline-block card">
             <img src="{{this.img_link}}">
@@ -20,7 +20,7 @@
             <br> Stock Available : {{this.qty}}
             <br>
             <button value={{this.id}} onclick="addToCart(this.value)">
-                <i class="fas fa-shopping-cart"></i>
+           <i class="fas fa-shopping-cart"></i>
             </button>
 
             <br>
@@ -31,17 +31,6 @@
     </script>
 
 </head>
-
-<!-- <div class="row">
-    <div class="col-4">
-        <a href="index.html" id="logo">
-            <img src="img/logo.png">
-        </a>
-
-    </div>
-
-</div> -->
-
 <div class="nav" id="nav-bar">
     <a href="#">Home</a>
     <a href="cart.html">Cart</a>
@@ -50,8 +39,6 @@
         <i class="fa fa-bars"></i>
     </a>
 </div>
-
-
 
 <body class="center">
     <script type="text/x-template" id="search-bar-template">
@@ -63,7 +50,6 @@
                     {{/each}}
                 </select>
             </div>
-
             <div class="col-3">
                 <select id="shoeSize" class="inline-block">
                     <option value="null">All Sizes</option>
@@ -81,14 +67,13 @@
                     {{/each}}
                 </select>
             </div>
+            <div class="col-3">
+                    <button id="searchButton" class="search-button" onclick="search()">
+                        <i class="fas fa-search"></i> Search</button>
+                </div>
     </script>
 
     <div id="search-bar" class="row search-bar">
-
-    </div>
-    <div class="col-3">
-        <button id="searchButton">
-            <i class="fas fa-search"></i> Search</button>
     </div>
     </div>
     <div id="shoesArea" class="row center">

@@ -4,9 +4,9 @@ let checkOutBtn = document.getElementById('checkOutBtn');
 let showCart = function () {
     axios.get('api/shoes/cart').then(function (res) {
         if (res.data.data.length == 0) {
-            checkOutBtn.style.display = 'none';
             displayCart('Sorry you have not added any items to the cart :(')
         } else {
+            checkOutBtn.style.display = 'inline-block';
             displayCart(res.data.data);
         };
     });
@@ -35,12 +35,12 @@ let removeFromCart = function (shoeId) {
         })
         .then(function (response) {
             if (response.data.data > 0) {
+                checkOutBtn.style.display = 'inline-block';
                 showCart();
             } else {
-                displayCart('Changed your mind? Checkout our new range under the new shoes section');
+                displayCart("We are sad to see you remove all the shoes,we'll make sure to have the ones you'll love next time!");
                 checkOutBtn.style.display = 'none';
             }
-            console.log(response);
         })
         .catch(function (error) {
             console.log(error);
@@ -52,7 +52,6 @@ let checkOut = function () {
         .then(function (response) {
             if (response.data.data == "cartCleared") {
                 displayCart('Thanks for shopping with us, have a lovely day!')
-                checkOutBtn.style.display = 'none';
             }
         })
         .catch(function (error) {

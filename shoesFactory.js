@@ -143,6 +143,8 @@ module.exports = function ShoeServices(pool) {
                 cart.push(shoeItem);
             }
         } finally {
+            // sort the cart by shoe id to maintain consistance templating
+            cart = cart.sort((a, b) => a.id - b.id);
             return cart
         }
     }
