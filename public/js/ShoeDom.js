@@ -1,5 +1,12 @@
 let searchBtnElement = document.querySelectorAll('.searchButton');
 let noStockBtn = document.getElementById('no-stock-btn');
+//shoe shoes on load
+
+axios.get('shoes/api').then(function (res) {
+    displayShoes(res.data.data);
+});
+
+
 
 //create drop down selectors with data from the api
 let makeSelectors = function () {
@@ -109,17 +116,6 @@ let search = function () {
 
 // make selectors and display the shoes
 makeSelectors();
-refresh();
-
-
-
-
-
-
-
-
-
-
 
 // EVENTS FOR MODALS
 noStockBtn.addEventListener('click', function () {
