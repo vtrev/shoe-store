@@ -139,7 +139,7 @@ module.exports = function ShoeServices(pool) {
                 let cartQtyQuery = await pool.query(`SELECT qty FROM cart WHERE shoe_id=${shoesInCart[i].shoe_id}`)
                 let cartQty = cartQtyQuery.rows[0].qty;
                 shoeItem.qty = cartQty;
-                shoeItem["TotalPrice"] = (shoeItem.price * shoeItem.qty)
+                shoeItem["TotalPrice"] = (shoeItem.price * shoeItem.qty).toFixed(2);
                 cart.push(shoeItem);
             }
         } finally {
