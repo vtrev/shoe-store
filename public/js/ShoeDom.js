@@ -2,7 +2,7 @@ let searchBtnElement = document.querySelectorAll('.searchButton');
 let noStockBtn = document.getElementById('no-stock-btn');
 //shoe shoes on load
 
-axios.get('shoes/api').then(function (res) {
+axios.get('/api/shoes').then(function (res) {
     displayShoes(res.data.data);
 });
 
