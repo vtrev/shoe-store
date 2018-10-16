@@ -81,6 +81,10 @@ a {
     width: 100%;
 }
 
+#shoeColor {
+    display: none;
+}
+
 
 /* Style the links inside the navigation bar */
 .nav a {

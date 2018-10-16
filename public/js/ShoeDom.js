@@ -13,6 +13,7 @@ let makeSelectors = function () {
                 let shoeItem = shoes[i];
                 if (!brands.includes(shoeItem.brand)) {
                     brands.push(shoeItem.brand);
+                    brands = brands.sort();
                 };
                 if (!colors.includes(shoeItem.color)) {
                     colors.push(shoeItem.color);
