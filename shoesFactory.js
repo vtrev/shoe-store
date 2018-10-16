@@ -95,7 +95,7 @@ module.exports = function ShoeServices(pool) {
         if (action == 'gain') {
             let cartQtyQuery = await pool.query(`SELECT qty FROM cart WHERE shoe_id=${shoeId}`);
             let cartQty = cartQtyQuery.rows[0].qty;
-            await pool.query(`UPDATE shoes SET qty = qty+${cartQty} WHERE id=${shoeId}`);
+            await pool.query(`UPDATE shoes SET qty = qty+1 WHERE id=${shoeId}`);
             await updateCart(shoeId, 'remove');
             let cartLength = await pool.query('SELECT shoe_id FROM cart');
             return cartLength.rows.length
