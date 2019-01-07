@@ -50,7 +50,6 @@ let makeSelectors = function () {
 let refresh = function () {
     let prevSpecs = localStorage.getItem('prevSpecs');
     axios.get(prevSpecs).then(function (res) {
-        console.log(res.data.data);
         displayShoes(res.data.data);
     });
 };

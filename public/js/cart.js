@@ -51,7 +51,9 @@ let checkOut = function () {
     axios.post('/api/shoes/cart/')
         .then(function (response) {
             if (response.data.data == "cartCleared") {
-                displayCart('Thanks for shopping with us, have a lovely day!')
+                displayCart('Thanks for shopping with us, have a lovely day!');
+                checkOutBtn.style.display = 'none';
+
             }
         })
         .catch(function (error) {
