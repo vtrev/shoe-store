@@ -23,7 +23,7 @@ if (process.env.DATABASE_URL && !local) {
     useSSL = true;
 }
 // which db connection to use
-const connectionString = process.env.DATABASE_URL || 'postgresql://postgres:pass@127.0.0.1:5432/shoesdb';
+const connectionString = process.env.DATABASE_URL || 'postgresql://postgres@127.0.0.1:5432/shoesdb';
 
 const pool = new Pool({
     connectionString,

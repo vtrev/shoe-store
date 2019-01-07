@@ -50,6 +50,7 @@ let makeSelectors = function () {
 let refresh = function () {
     let prevSpecs = localStorage.getItem('prevSpecs');
     axios.get(prevSpecs).then(function (res) {
+        console.log(res.data.data);
         displayShoes(res.data.data);
     });
 };
@@ -63,8 +64,8 @@ let addToCart = function (shoeId) {
                 document.querySelector('#noStockModal').style.display = "flex";
                 scrollWindow();
             }
+            search();
             refresh();
-            console.log(response);
         })
         .catch(function (error) {
             console.log(error);
