@@ -85,32 +85,50 @@ let search = function () {
     specs.brand = document.getElementById('shoeBrand').value;
     specs.color = document.getElementById('shoeColor').value;
     specs.size = document.getElementById('shoeSize').value;
+    // console.log(specs);
+    // if (specs.brand == 'null' && specs.size == 'null') {
+    //     let route = 'api/shoes';
+    //     axios.get(route).then(function (res) {
+    //         displayShoes(res.data.data);
+    //     });
+    //     localStorage.setItem('prevSpecs', route);
+    // }
+    let route = 'api/shoes';
 
-    if (specs.brand == 'null' && specs.size == 'null') {
-        let route = 'api/shoes';
-        axios.get(route).then(function (res) {
-            displayShoes(res.data.data);
-        });
-        localStorage.setItem('prevSpecs', route);
-    } else if (specs.brand !== 'null' && specs.size == 'null') {
-        let route = `api/shoes/brand/${specs.brand}`;
-        axios.get(route).then(function (res) {
-            displayShoes(res.data.data);
-        });
-        localStorage.setItem('prevSpecs', route);
-    } else if (specs.brand !== 'null' && specs.size !== 'null') {
-        let route = `api/shoes/brand/${specs.brand}/size/${specs.size}`;
-        axios.get(route).then(function (res) {
-            displayShoes(res.data.data)
-        });
-        localStorage.setItem('prevSpecs', route);
-    } else if (specs.brand == 'null' && specs.size !== 'null') {
-        let route = `api/shoes/size/${specs.size}`;
-        axios.get(route).then(function (res) {
-            displayShoes(res.data.data)
-        });
-        localStorage.setItem('prevSpecs', route);
-    };
+    if (specs.brand || specs.size) {
+        if (specs.brand) {
+            route = `api/shoes/brand/${specs.brand}`;
+        }
+        if (specs.size) {
+            route = `api/shoes/size/${specs.size}`;
+        }
+        if (specs.brand && specs.size) {
+            route = `api/shoes/brand/${specs.brand}/size/${specs.size}`;
+        }
+
+    }
+    axios.get(route).then(function (res) {
+        displayShoes(res.data.data);
+    });
+    localStorage.setItem('prevSpecs', route);
+
+    // if (specs.brand && specs.size) {
+    //     let route = `api/shoes/brand/${specs.brand}/size/${specs.size}`;
+    //     axios.get(route).then(function (res) {
+    //         displayShoes(res.data.data)
+    //     });
+    //     localStorage.setItem('prevSpecs', route);
+    //     return
+    // } 
+
+
+    // if (spec s.brand == 'null' && specs.size !== 'null') {
+    //     let route = `api/shoes/size/${specs.size}`;
+    //     axios.get(route).then(function (res) {
+    //         displayShoes(res.data.data)
+    //     });
+    //     localStorage.setItem('prevSpecs', route);
+    // };
 };
 
 
